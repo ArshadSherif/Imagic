@@ -5,10 +5,17 @@ module.exports = {
 	//   "./pages/**/*.{ts,tsx}",
 	//   "./components/**/*.{ts,tsx}",
 	//   "./app/**/*.{ts,tsx}",
-	  "./src/**/*.{ts,tsx}",
-	  "./app//*.{js,ts,jsx,tsx,mdx}",
-	  "./pages//*.{js,ts,jsx,tsx,mdx}",
-	  "./Components//*.{js,ts,jsx,tsx,mdx}",
+	//   "./src/**/*.{ts,tsx}",
+
+    "./Components/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+
+	// "./pages/**/*.{ts,tsx}",
+    // "./Components/**/*.{ts,tsx}",
+    // "./app/**/*.{ts,tsx}",
+    // "./src/**/*.{ts,tsx}",
 
 	],
 	prefix: "",
