@@ -9,10 +9,12 @@ import { handleError } from "../utils";
 // CREATE
 export async function createUser(user: CreateUserParams) {
   try {
+    console.log("INSIDE CREATE USER");
     await connectToDatabase();
     const newUser = await User.create(user);
     return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
+    console.log("Error in createUser:", error);
     handleError(error);
   }
 }
@@ -33,19 +35,41 @@ export async function getUserById(userId: string) {
 }
 
 // UPDATE
+// export async function updateUser(clerkId: string, user: UpdateUserParams) {
+//   try {
+//     await connectToDatabase();
+
+//     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
+//       new: true,
+//     });
+
+//     console.log("Updated USER :" , updatedUser)
+
+//     if (!updatedUser) throw new Error("User update failed");
+    
+//     return JSON.parse(JSON.stringify(updatedUser));
+//   } catch (error) {
+//     handleError(error);
+//   }
+// }
 export async function updateUser(clerkId: string, user: UpdateUserParams) {
   try {
     await connectToDatabase();
 
+
+    // Log the user object being passed to the database
+    console.log("User object to update in DB:", user);
+
     const updatedUser = await User.findOneAndUpdate({ clerkId }, user, {
       new: true,
     });
-
+    console.log("Updated USER:", updatedUser);
     if (!updatedUser) throw new Error("User update failed");
-    
+
     return JSON.parse(JSON.stringify(updatedUser));
   } catch (error) {
-    handleError(error);
+    console.error("Error in updateUser:", error); // Log the error details
+    // handleError(error);
   }
 }
 

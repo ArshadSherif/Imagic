@@ -7,6 +7,7 @@ import { Webhook } from "svix";
 
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
+
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
@@ -85,22 +86,29 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "OK", user: newUser });
   }
 
-  // UPDATE
+  //UPDATE
   if (eventType === "user.updated") {
+
     const { id, image_url, first_name, last_name, username } = evt.data;
 
+    console.log("Destructured fields:", { id, image_url, first_name, last_name, username });
     const user = {
       firstName: first_name ?? "",
       lastName: last_name ?? "",
-      username: username!,
+      username: username??"default_username",
       photo: image_url,
     };
 
-    const updatedUser = await updateUser(id, user);
 
+    const updatedUser = await updateUser(id, user);
     return NextResponse.json({ message: "OK", user: updatedUser });
+
+
+
+   
   }
 
+ 
   // DELETE
   if (eventType === "user.deleted") {
     const { id } = evt.data;
