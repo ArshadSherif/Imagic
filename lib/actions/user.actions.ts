@@ -22,6 +22,7 @@ export async function createUser(user: CreateUserParams) {
 // READ
 export async function getUserById(userId: string) {
   try {
+
     await connectToDatabase();
 
     const user = await User.findOne({ clerkId: userId });
@@ -30,6 +31,7 @@ export async function getUserById(userId: string) {
 
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
+    console.log("Error in getuserById:", error);
     handleError(error);
   }
 }
@@ -100,6 +102,8 @@ export async function updateCredits(userId: string, creditFee: number) {
   try {
     await connectToDatabase();
 
+    
+
     const updatedUserCredits = await User.findOneAndUpdate(
       { _id: userId },
       { $inc: { creditBalance: creditFee }},
@@ -113,3 +117,5 @@ export async function updateCredits(userId: string, creditFee: number) {
     handleError(error);
   }
 }
+
+

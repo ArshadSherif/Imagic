@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
 import mongoose, { Mongoose } from 'mongoose';
 
+
+
+
+// const MONGODB_URL = process.env.MONGODB_URL;
+
 interface Cached {
   conn: Mongoose | null;
   promise: Promise<Mongoose> | null;
@@ -20,11 +25,16 @@ const globalWithMongoose = global as typeof global & { mongoose: Cached };
 const cached: Cached = globalWithMongoose.mongoose || { conn: null, promise: null };
 
 export const connectToDatabase = async (): Promise<Mongoose> => {
+
+  console.log("inside connectToDatabase");
   // Return cached connection if it exists
   if (cached.conn) return cached.conn;
 
+  console.log("before defining URL");
+
   // Throw an error if MONGODB_URL is not defined
   const MONGODB_URL = process.env.MONGODB_URL;
+  console.log('MONGODB_URL:', MONGODB_URL);
   if (!MONGODB_URL) throw new Error('Missing MONGODB_URL');
 
   // Create a new connection promise if it doesn't exist

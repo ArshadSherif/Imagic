@@ -11,6 +11,8 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+	'./public/index.html',
+	"./app/**/*.{js,ts,jsx,tsx}",
 
 	// "./pages/**/*.{ts,tsx}",
     // "./Components/**/*.{ts,tsx}",
